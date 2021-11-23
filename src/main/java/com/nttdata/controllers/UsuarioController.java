@@ -1,10 +1,11 @@
 package com.nttdata.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nttdata.models.Usuario;
 
@@ -22,12 +23,15 @@ public class UsuarioController {
 	
 	//capturar la informacion del formulario
 	@RequestMapping("/login")
-	public String login(@RequestParam("nombre") String nombre,
+	/*public String login(@RequestParam("nombre") String nombre,
 			@RequestParam("apellido") String apellido,
 			@RequestParam("limite") String limite,
 			@RequestParam("cp") String codigoPostal
-			) {
-		System.out.println(nombre+" "+apellido+" "+limite+" "+codigoPostal);
+			) */
+	public String login(@Valid @ModelAttribute("usuario") Usuario usuario)
+	{
+		System.out.println(usuario.getNombre()+" "+usuario.getApellido()+" "+usuario.getLimite()+" "+usuario.getCodigoPostal());
+		//System.out.println(nombre+" "+apellido+" "+limite+" "+codigoPostal);
 		return "redirect:/usuario";
 	}
 	
