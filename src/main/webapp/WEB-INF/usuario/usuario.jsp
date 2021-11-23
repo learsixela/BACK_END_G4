@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +14,24 @@
 
 <body>
 	<div class="container">
-		<form method="post" action="/usuario/login">
+		<form:form method="post" action="/usuario/login" modelAttribute="usuario">
+			<form:label path="nombre">Nombre:</form:label>
+			<form:input type="text" path="nombre"/>
+			<br>
+			<form:label path="apellido">Apellido:</form:label>
+			<form:input type="text" path="apellido"/>
+			<br>
+			<form:label path="limite">Limite:</form:label>
+			<form:input type="text" path="limite"/>
+			<br>
+			<form:label path="codigoPostal">Código Postal:</form:label>
+			<form:input type="text" path="codigoPostal"/>
+			<br>
+			<input type="button" value="Limpiar">
+			<input type="submit" value="Submit">
+		</form:form>
+	
+		<!--<form method="post" action="/usuario/login">
 			<label for="nombre">Nombre:</label>
 			<input type="text" id="nombre" name="nombre">
 			<br>
@@ -28,7 +46,7 @@
 			<br>
 			<input type="button" value="Limpiar">
 			<input type="submit" value="Submit">			
-		</form>
+		</form>-->
 	</div>
 </body>
 
