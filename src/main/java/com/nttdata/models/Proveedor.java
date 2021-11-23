@@ -1,6 +1,18 @@
 package com.nttdata.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity//representacion de la entidad modelo
+@Table(name="proveedores")//nombre de la tabla en la bbdd
 public class Proveedor {
+	@Id //clave primaria o PK
+	@GeneratedValue(strategy= GenerationType.IDENTITY)//auto incrementable
+	private Long id;
+	
 	private String nombre; 
 	private String apellido; 
 	private String email; 
