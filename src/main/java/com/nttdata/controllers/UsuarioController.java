@@ -14,9 +14,18 @@ import com.nttdata.services.UsuarioService;
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
-	//inyección de dependencia
+	/*
+	private final UsuarioService us;
+	
+	public UsuarioController(UsuarioService usuarioService) {
+		this.us = usuarioService;
+	}
+	*/
+	
+	//facilita la inyección de dependencia
 	@Autowired
 	UsuarioService usuarioService;
+	
 
 	//desplegar inicialmente el jsp
 	@RequestMapping("")
@@ -37,6 +46,9 @@ public class UsuarioController {
 	{
 		System.out.println(usuario.getNombre()+" "+usuario.getApellido()+" "+usuario.getLimite()+" "+usuario.getCodigoPostal());
 		//System.out.println(nombre+" "+apellido+" "+limite+" "+codigoPostal);
+		
+		usuarioService.insertarUsuario(usuario);
+		
 		return "redirect:/usuario";
 	}
 	
