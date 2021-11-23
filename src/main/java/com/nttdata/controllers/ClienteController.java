@@ -1,16 +1,19 @@
 package com.nttdata.controllers;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping("/clientes")
 public class ClienteController {
 	
 	@RequestMapping("")
-	public String clientes() {
-		return "estamos en clientes";
+	public String clientes(Model model) {
+		model.addAttribute("nombre", "Israel");
+		model.addAttribute("apellido", "Palma");
+		return "cliente.jsp";
 	}
 	
 	@RequestMapping("/pagos")
