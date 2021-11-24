@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +16,8 @@
 		<c:if test="${error == 'si'}">
 			<p> <c:out value="${mensaje}"/></p>
 		</c:if>
-		<%= session.getAttribute("mensaje")%>
+		<% String req = request.getParameter("name"); %>
+		<% String mensaje = session.getAttribute("mensaje").toString();%>
 
 		<p>nombre: <c:out value="${nombre}"/></p>
 		<p>apellido: <c:out value="${apellido}"/></p>

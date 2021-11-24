@@ -15,10 +15,7 @@
 
 <body>
 	<div class="container">
-	<h1>Usuarios</h1>
-			<hr>
-	<h2>Crear usuarios</h2>
-		<form:form method="post" action="/usuario/login" modelAttribute="usuario">
+		<form:form method="post" action="/usuario/update/${usuario.id}" modelAttribute="usuario">
 			<input type="hidden" name="_method" value="put">
 			<form:label path="nombre" class="col-sm-2 col-form-label">Nombre:</form:label>
 			<form:input type="text" path="nombre" class="form-control"/>
@@ -31,48 +28,11 @@
 			<br>
 			<form:label path="codigoPostal" class="col-sm-2 col-form-label">Código Postal:</form:label>
 			<form:input type="text" path="codigoPostal" class="form-control"/>
-			<br>			
-			<a href="/usuario" class="btn btn-success" role="button" data-bs-toggle="button">Limpiar</a>
-			<input type="submit" class="btn btn-primary" value="Submit">
+			<br>
+			<a href="/usuario" class="btn btn-success" role="button" data-bs-toggle="button">Volver</a>
+			<input class="btn btn-warning" type="submit" value="Editar">
 
 		</form:form>
-	
-		<br>
-		<hr>
-		<h2>Crear usuarios</h2>
-		<table class="table">
-		  <thead>
-		    <tr>
-		      <th scope="col">#</th>
-		      <th scope="col">Nombre</th>
-		      <th scope="col">Apellido</th>
-		      <th scope="col">Limite</th>
-		      <th scope="col">Código Postal</th>
-		      <th scope="col-2">Acciones</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  	<c:forEach items="${listaUsuarios}" var="usuario" >
-			    <tr>
-			      <th scope="row">${usuario.getId()}</th>
-			      <td>${usuario.getNombre()}</td>
-			      <td>${usuario.getApellido()}</td>
-			      <td>${usuario.getLimite()}</td>
-			      <td>${usuario.getCodigoPostal()}</td>
-			      <td>
-			      <a href="/usuario/${usuario.getId()}/editar" class="btn btn-primary" role="button" data-bs-toggle="button">Editar</a>
-			      
-			      </td>
-			      <td>
-				      <form action="/usuario/eliminar" method="get">
-				      	<input type="hidden" name="id" value="${usuario.getId()}">
-				      	<input class="btn btn-danger" type="submit" value="Eliminar">
-				      </form>
-			      </td>
-			    </tr>
-		    </c:forEach>
-		  </tbody>
-		</table>
 	</div>
 </body>
 

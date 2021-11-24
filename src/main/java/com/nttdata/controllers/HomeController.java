@@ -35,7 +35,10 @@ public class HomeController {
 	public String eliminar(@PathVariable("id") Long id) {
 		
 		Usuario usuario = usuarioService.buscarUsuarioId(id);
-		usuarioService.eliminarUsuario(id);
+		if(usuario !=null) {
+			usuarioService.eliminarUsuario(id);
+		}
+		
 		
 		return "Usuario Eliminado";
 		
