@@ -18,7 +18,6 @@
 		</c:if>
 		<%= session.getAttribute("mensaje")%>
 
-
 		<p>nombre: <c:out value="${nombre}"/></p>
 		<p>apellido: <c:out value="${apellido}"/></p>
 	</div>

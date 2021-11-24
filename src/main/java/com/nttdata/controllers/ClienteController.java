@@ -16,7 +16,9 @@ public class ClienteController {
 	
 		model.addAttribute("error", "si");
 		model.addAttribute("mensaje", "Error en el nombre model");
+		
 		session.setAttribute("mensaje", "Error en el nombre session");
+		
 		model.addAttribute("nombre", "Israel");
 		model.addAttribute("apellido", "Palma");
 		return "cliente.jsp";

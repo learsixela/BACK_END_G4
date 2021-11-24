@@ -33,22 +33,39 @@
 
 		</form:form>
 	
-		<!--<form method="post" action="/usuario/login">
-			<label for="nombre">Nombre:</label>
-			<input type="text" id="nombre" name="nombre">
-			<br>
-			<label for="apellido">Apellido:</label>
-			<input type="text" id="apellido" name="apellido">
-			<br>
-			<label for="limite">Limite:</label>
-			<input type="text" id="limite" name="limite">
-			<br>
-			<label for="cp">Código Postal:</label>
-			<input type="text" id="cp" name="cp">
-			<br>
-			<input type="button" value="Limpiar">
-			<input type="submit" value="Submit">			
-		</form>-->
+		<br>
+		<hr>
+		
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Nombre</th>
+		      <th scope="col">Apellido</th>
+		      <th scope="col">Limite</th>
+		      <th scope="col">Código Postal</th>
+		      <th scope="col-2">Acciones</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<c:forEach items="${listaUsuarios}" var="usuario" >
+			    <tr>
+			      <th scope="row">${usuario.getId()}</th>
+			      <td>${usuario.getNombre()}</td>
+			      <td>${usuario.getApellido()}</td>
+			      <td>${usuario.getLimite()}</td>
+			      <td>${usuario.getCodigoPostal()}</td>
+			      <td>editar</td>
+			      <td>
+				      <form action="/usuario/eliminar" method="get">
+				      	<input type="hidden" name="id" value="${usuario.getId()}">
+				      	<input type="submit" value="X">
+				      </form>
+			      </td>
+			    </tr>
+		    </c:forEach>
+		  </tbody>
+		</table>
 	</div>
 </body>
 
