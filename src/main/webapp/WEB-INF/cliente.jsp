@@ -13,6 +13,12 @@
 
 <body>
 	<div class="container">
+		<c:if test="${error == 'si'}">
+			<p> <c:out value="${mensaje}"/></p>
+		</c:if>
+		<%= session.getAttribute("mensaje")%>
+
+
 		<p>nombre: <c:out value="${nombre}"/></p>
 		<p>apellido: <c:out value="${apellido}"/></p>
 	</div>

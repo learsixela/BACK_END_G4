@@ -1,5 +1,7 @@
 package com.nttdata.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ClienteController {
 	
 	@RequestMapping("")
-	public String clientes(Model model) {
+	public String clientes(Model model,HttpSession session ) {
+	
+		model.addAttribute("error", "si");
+		model.addAttribute("mensaje", "Error en el nombre model");
+		session.setAttribute("mensaje", "Error en el nombre session");
 		model.addAttribute("nombre", "Israel");
 		model.addAttribute("apellido", "Palma");
 		return "cliente.jsp";
