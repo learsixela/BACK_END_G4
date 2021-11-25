@@ -18,6 +18,7 @@
 	<h1>Usuarios</h1>
 			<hr>
 	<h2>Crear usuarios</h2>
+	
 		<form:form method="post" action="/usuario/login" modelAttribute="usuario">
 			<input type="hidden" name="_method" value="put">
 			<form:label path="nombre" class="col-sm-2 col-form-label">Nombre:</form:label>
