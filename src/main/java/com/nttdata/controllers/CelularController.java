@@ -26,7 +26,9 @@ public class CelularController {
 	@RequestMapping("")
 	public String index(Model model) {
 		model.addAttribute("celular", new Celular());
+		model.addAttribute("listaCelulares", celularService.obtenerListaCelulares());
 		model.addAttribute("listaUsuarios", usuarioService.obtenerListaUsuarios());
+		
 		
 		return "celular/celular.jsp";
 	}
