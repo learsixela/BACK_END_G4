@@ -33,6 +33,8 @@
 			<input type="submit" class="btn btn-primary" value="Crear Celular">
 
 		</form:form>
+		<br>
+		<!-- lista de los celulares y sus usuario -->
     </div>
 </body>
 

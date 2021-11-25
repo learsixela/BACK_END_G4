@@ -14,7 +14,7 @@ public class HomeController {
 	@Autowired
 	UsuarioService usuarioService;
 	
-	@RequestMapping("/")
+	@RequestMapping("")
 	//http://localhost:8080/
 	// metodo inicial
 	public String index() {
