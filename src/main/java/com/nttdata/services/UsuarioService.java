@@ -22,7 +22,8 @@ public class UsuarioService {
 
 	public List<Usuario> obtenerListaUsuarios() {
 		
-		return  usuarioRepository.findAll();
+		//return  usuarioRepository.findAll();
+		return  usuarioRepository.findAllUsuarios();
 	}
 
 	public Usuario buscarUsuarioId(Long id) {
@@ -45,5 +46,16 @@ public class UsuarioService {
 		}		
 	}
 	
+	public List<String> findAllUsuariosNombres(){
+		return usuarioRepository.findAllUsuariosNombres();
+	}
 	
+	public List<Object[]> findAllUsuariosNombreApellido(){
+		return usuarioRepository.findAllUsuariosNombreApellido();
+	}
+	
+	public List<Usuario> obtenerUsuarioWhereId(Long id){
+		return usuarioRepository.obtenerUsuarioWhereId(id);
+	}
+	 
 }

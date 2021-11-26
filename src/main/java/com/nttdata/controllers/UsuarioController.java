@@ -1,5 +1,7 @@
 package com.nttdata.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +47,10 @@ public class UsuarioController {
 		//lista de usuarios
 		model.addAttribute("listaUsuarios", usuarioService.obtenerListaUsuarios());
 		model.addAttribute("listaProyectos", proyectoService.getAll());
-		
+		usuarioService.findAllUsuariosNombres();
+		List<Object[]> oUsuarios = usuarioService.findAllUsuariosNombreApellido();
+		oUsuarios.get(0);
+		List<Usuario> lUsuario=usuarioService.obtenerUsuarioWhereId(5L);
 		
 		return "usuario/usuario.jsp";
 	}
