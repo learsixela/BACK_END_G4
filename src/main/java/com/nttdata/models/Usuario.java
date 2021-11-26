@@ -1,13 +1,22 @@
 package com.nttdata.models;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity//representacion de la entidad modelo
 @Table(name="usuarios")//nombre de la tabla en la bbdd
@@ -17,6 +26,8 @@ public class Usuario {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)//auto incrementable
 	private Long id;
 	
+	@NotNull
+	@NotEmpty
 	private String nombre;
 	private String apellido;
 	private String limite;
@@ -25,6 +36,15 @@ public class Usuario {
 	@OneToOne(mappedBy ="usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Celular celular;
 	
+	//relacion muchos a uno
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="proyecto_id")
+	private Proyecto proyecto;
+	
+	@Column(updatable = false)
+	private Date createdAt;
+	
+	private Date updatedAt;
 	
 	public Usuario() {
 		super();
@@ -78,6 +98,21 @@ public class Usuario {
 	public void setCelular(Celular celular) {
 		this.celular = celular;
 	}
+
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
+
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
+	}
 	
-	
+	@PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
+    }
 }

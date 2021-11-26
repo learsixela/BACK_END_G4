@@ -24,6 +24,12 @@
 			<br>
 			<form:label path="codigoPostal" class="col-sm-2 col-form-label">Código Postal:</form:label>
 			<form:input type="text" path="codigoPostal" class="form-control"/>
+			<br>
+			<form:select class="form-select" path="proyecto">
+				<c:forEach var="proyecto" items="${listaProyectos}">
+					<form:option value="${proyecto.getId()}">${proyecto.getNombre()}</form:option>
+				</c:forEach>
+			</form:select>
 			<br>			
 			<a href="/usuario" class="btn btn-success" role="button" data-bs-toggle="button">Limpiar</a>
 			<input type="submit" class="btn btn-primary" value="Submit">
@@ -32,7 +38,7 @@
 	
 		<br>
 		<hr>
-		<h2>Crear usuarios</h2>
+		<h2>Lista de usuarios</h2>
 		<table class="table">
 		  <thead>
 		    <tr>
@@ -41,6 +47,7 @@
 		      <th scope="col">Apellido</th>
 		      <th scope="col">Limite</th>
 		      <th scope="col">Código Postal</th>
+		      <th scope="col">Proyecto</th>
 		      <th scope="col-2">Acciones</th>
 		    </tr>
 		  </thead>
@@ -52,6 +59,7 @@
 			      <td>${usuario.getApellido()}</td>
 			      <td>${usuario.getLimite()}</td>
 			      <td>${usuario.getCodigoPostal()}</td>
+			      <td>${usuario.getProyecto().getNombre()}</td>
 			      <td>
 			      <a href="/usuario/${usuario.getId()}/editar" class="btn btn-primary" role="button" data-bs-toggle="button">Editar</a>
 			      

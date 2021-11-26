@@ -1,13 +1,49 @@
 package com.nttdata.models;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="clientes")
 public class Cliente {
 //atributos
+	@Id //clave primaria o PK
+	@GeneratedValue(strategy= GenerationType.IDENTITY)//auto incrementable
+	private Long id;
+	
 	private String rut;
 	private String nombre; 
 	private Integer edad; 
 	private String sexo;
 	private Boolean plan;
 	private String celular;
+	@Column(updatable = false)
+	private Date createdAt;
+	private Date updatedAt;
+
+	
+	//relacion many to many
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(
+		name="clientes_proveedores",//tabla intermedia
+		joinColumns = @JoinColumn(name="cliente_id"),
+		inverseJoinColumns = @JoinColumn(name="proveedor_id")
+	)
+	private List<Proveedor> proveedores;
+
 	
 	public Cliente() {
 		super();
@@ -65,7 +101,20 @@ public class Cliente {
 		this.celular = celular;
 	}
 	
-
+	@PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
+    }
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 
 }

@@ -46,8 +46,9 @@
 			      <th scope="row">${celular.getId()}</th>
 			      <td>${celular.getNumero()}</td>
 			      <td>${celular.getMarca()}</td>
-			      <td>${celular.getUsuario().getNombre()} 
-			      ${celular.getUsuario().getApellido()}
+			      <td>
+			      	${celular.getUsuario().getNombre()} 
+			      	${celular.getUsuario().getApellido()}
 			      </td>
 			     
 			      <td>

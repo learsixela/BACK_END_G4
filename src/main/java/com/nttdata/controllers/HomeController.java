@@ -19,6 +19,7 @@ public class HomeController {
 	//http://localhost:8080/
 	// metodo inicial
 	public String index() {
+
 		return "index.jsp";
 	}
 

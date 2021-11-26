@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nttdata.models.Usuario;
+import com.nttdata.services.ProyectoService;
 import com.nttdata.services.UsuarioService;
 
 @Controller
@@ -30,6 +33,9 @@ public class UsuarioController {
 	@Autowired
 	UsuarioService usuarioService;
 	
+	@Autowired
+	ProyectoService proyectoService;
+	
 
 	//desplegar inicialmente el jsp
 	@RequestMapping("")
@@ -38,6 +44,9 @@ public class UsuarioController {
 		//List<Usuario> listaUsuarios= usuarioService.obtenerListaUsuarios();
 		//lista de usuarios
 		model.addAttribute("listaUsuarios", usuarioService.obtenerListaUsuarios());
+		model.addAttribute("listaProyectos", proyectoService.getAll());
+		
+		
 		return "usuario/usuario.jsp";
 	}
 	
@@ -59,6 +68,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/eliminar")
+	//@DeleteMapping
 	public String eliminarUsuario(@RequestParam("id") Long id) {
 		
 		Usuario usuario = usuarioService.buscarUsuarioId(id);
@@ -75,14 +85,16 @@ public class UsuarioController {
     	System.out.println("editar");
     	Usuario usuario = usuarioService.buscarUsuarioId(id);
     	if(usuario !=null) {
-		       model.addAttribute("usuario", usuario);
-		       return "/usuario/editar.jsp";
+    		model.addAttribute("listaProyectos", proyectoService.getAll());
+		    model.addAttribute("usuario", usuario);
+		    return "/usuario/editar.jsp";
 		}
 		
 		return "redirect:/usuario";
     }
     
-    @RequestMapping(value="/update/{id}", method=RequestMethod.PUT)
+    @RequestMapping(value="/update", method=RequestMethod.PUT)
+    //@PutMapping("/update")
     public String update(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result) {
     	System.out.println("Update");
         if (result.hasErrors()) {
