@@ -54,6 +54,26 @@
 		    </c:forEach>
 		  </tbody>
 		</table>
+		<br>
+		<hr>
+	 <h2> Lista desde Join</h2>
+	 
+	 <table>
+		 <thead>
+		 <tr>
+		 	<th>Nombre Proyecto</th>
+		 	<th>Nombre Usuario</th>
+		 </tr>
+		 </thead>
+		 <tbody>
+		 	<c:forEach var="fila" items="${proyectoUsuarios}">
+			 	<tr>
+			 		<td>${fila[0].getNombre()}</td>
+			 		<td>${fila[1].nombre}</td>
+			 	</tr>
+		 	</c:forEach>
+		 </tbody>
+	 </table>
 	</div>
 	<jsp:include page='../template/footer.jsp'/>
 </body>

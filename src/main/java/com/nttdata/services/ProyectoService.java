@@ -24,5 +24,8 @@ public class ProyectoService {
 		pr.save(proyecto);
 	}
 	
+	public List<Object[]> obtenerProyectosYUsuarios(){
+		return pr.obtenerProyectosYUsuarios();
+	}
 	
 }

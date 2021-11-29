@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,20 +53,39 @@ public class UsuarioController {
 		return "usuario/usuario.jsp";
 	}
 	
+	@RequestMapping("/registrarjsp")
+	public String registrarjsp(@ModelAttribute("usuario") Usuario usuario) {
+
+		return "usuario/registro.jsp";
+	}
+	
 	//capturar la informacion del formulario
 	@RequestMapping("/login")
-	/*public String login(@RequestParam("nombre") String nombre,
-			@RequestParam("apellido") String apellido,
-			@RequestParam("limite") String limite,
-			@RequestParam("cp") String codigoPostal
-			) */
-	public String login(@Valid @ModelAttribute("usuario") Usuario usuario)
+	public String login(@RequestParam("email") String email,
+			@RequestParam("password") String password
+			) 
 	{
-		System.out.println(usuario.getNombre()+" "+usuario.getApellido()+" "+usuario.getLimite()+" "+usuario.getCodigoPostal());
-		//System.out.println(nombre+" "+apellido+" "+limite+" "+codigoPostal);
+		System.out.println(email+" "+password);
 		
-		usuarioService.insertarUsuario(usuario);
+		boolean resultado = usuarioService.loginUsuario(email,password);
+		if(resultado) {
+			return "redirect:/home";
+		}else {
+			return "redirect:/login";
+		}
 		
+	}
+	
+	@RequestMapping("/registrar")
+	public String registrar(@Valid @ModelAttribute("usuario") Usuario usuario)
+	{
+		Usuario usuario2 = usuarioService.findByEmail(usuario.getEmail());
+		if(usuario2!= null) {
+			usuarioService.registroUsuario(usuario);
+		}
+		//retorno mensaje
+		
+
 		return "redirect:/usuario";
 	}
 	

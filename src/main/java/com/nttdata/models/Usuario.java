@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -32,6 +33,13 @@ public class Usuario {
 	private String apellido;
 	private String limite;
 	private String codigoPostal;
+	
+	private String rut;
+	private String email;
+	private String password;
+	@Transient
+	private String passwordConfirmation;
+	
 	//relacion 1 a 1
 	@OneToOne(mappedBy ="usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Celular celular;
@@ -50,6 +58,20 @@ public class Usuario {
 		super();
 	}
 	
+	public Usuario(@NotNull @NotEmpty String nombre, String apellido, String limite, String codigoPostal, String rut,
+			String email, String password, Celular celular, Proyecto proyecto) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.limite = limite;
+		this.codigoPostal = codigoPostal;
+		this.rut = rut;
+		this.email = email;
+		this.password = password;
+		this.celular = celular;
+		this.proyecto = proyecto;
+	}
+
 	public Usuario(String nombre, String apellido, String limite, String codigoPostal) {
 		super();
 		this.nombre = nombre;
@@ -115,4 +137,36 @@ public class Usuario {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
+
+	public String getRut() {
+		return rut;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setRut(String rut) {
+		this.rut = rut;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPasswordConfirmation() {
+		return passwordConfirmation;
+	}
+
+	public void setPasswordConfirmation(String passwordConfirmation) {
+		this.passwordConfirmation = passwordConfirmation;
+	}
 }
