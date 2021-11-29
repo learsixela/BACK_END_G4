@@ -9,7 +9,7 @@
 <div class="container">
 <h2>Bienidos!!</h2>
  	<ul>
-	 	<li><a href="/usuario/registrarjsp">Registrate!</a></li>
+	 	<li><a href="/registro">Registrate!</a></li>
 	 	<li><a href="/login">Ingresa</a></li>
 	 </ul>
 </div>

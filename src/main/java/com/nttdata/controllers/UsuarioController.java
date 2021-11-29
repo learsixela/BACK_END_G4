@@ -2,6 +2,7 @@ package com.nttdata.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,7 @@ import com.nttdata.services.UsuarioService;
 @RequestMapping("/usuario")
 public class UsuarioController {
 	/*
-	private final UsuarioService us;
-	
-	public UsuarioController(UsuarioService usuarioService) {
-		this.us = usuarioService;
-	}
+	http://localhost:8080/usuario
 	*/
 	
 	//facilita la inyección de dependencia
@@ -52,28 +49,11 @@ public class UsuarioController {
 		
 		return "usuario/usuario.jsp";
 	}
-	
+	/*http://localhost:8080/usuario/registrarjsp */
 	@RequestMapping("/registrarjsp")
 	public String registrarjsp(@ModelAttribute("usuario") Usuario usuario) {
 
 		return "usuario/registro.jsp";
-	}
-	
-	//capturar la informacion del formulario
-	@RequestMapping("/login")
-	public String login(@RequestParam("email") String email,
-			@RequestParam("password") String password
-			) 
-	{
-		System.out.println(email+" "+password);
-		
-		boolean resultado = usuarioService.loginUsuario(email,password);
-		if(resultado) {
-			return "redirect:/home";
-		}else {
-			return "redirect:/login";
-		}
-		
 	}
 	
 	@RequestMapping("/registrar")
@@ -85,9 +65,33 @@ public class UsuarioController {
 		}
 		//retorno mensaje
 		
-
-		return "redirect:/usuario";
+		return "usuario/login.jsp";
 	}
+	
+	/*
+	http://localhost:8080/usuario/login
+	*/
+	//capturar la informacion del formulario
+	@RequestMapping("/login")
+	public String login(@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			HttpSession session
+			) 
+	{
+		boolean resultado = usuarioService.loginUsuario(email,password);
+		if(resultado) {
+			Usuario usuario = usuarioService.findByEmail(email);
+			//almacenando variables de sessio0n
+			session.setAttribute("usuario_id", usuario.getId());
+			session.setAttribute("nombre_usuario", usuario.getNombre());
+			return "redirect:/home";
+		}else {
+			return "redirect:/login";
+		}
+		
+	}
+	
+
 	
 	@RequestMapping("/eliminar")
 	//@DeleteMapping

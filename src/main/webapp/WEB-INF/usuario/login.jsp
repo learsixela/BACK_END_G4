@@ -5,20 +5,19 @@
 <jsp:include page='../template/header.jsp'/>
 
 <body>
-	<jsp:include page='../template/navbar.jsp'/>
 	<div class="container">
 	<h1>Login</h1>
 			<hr>
 	<h2>Ingreso al sistema</h2>
 	
-		<form action="" method="post">
+		<form action="/usuario/login" method="post">
 			<label for="email">Email:</label>
-			<input type="text" name="email">
+			<input type="email" class="form-control" name="email" placeholder="Ingresa tu email">
 			<br>
 			<label for="password">Password:</label>
-			<input type="password" name="password" placeholder="ingresa tu password">
+			<input type="password" class="form-control" name="password" placeholder="Ingresa tu password">
 			<br>
-			<input type="submit" value= "Ingresar">
+			<input type="submit" class="btn btn-primary" value= "Ingresar">
 		</form>
 	</div>
 	<jsp:include page='../template/footer.jsp'/>

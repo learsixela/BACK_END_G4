@@ -5,7 +5,6 @@
 <jsp:include page='../template/header.jsp'/>
 
 <body>
-	<jsp:include page='../template/navbar.jsp'/>
 	<div class="container">
 	<h1>Usuarios</h1>
 			<hr>
@@ -37,7 +36,7 @@
 			<form:label path="passwordConfirmation" class="col-sm-2 col-form-label">Password Confirmation:</form:label>
 			<form:input type="password" path="passwordConfirmation" class="form-control"/>
 			<br>
-			<input type="submit" class="btn btn-primary" value="Submit">
+			<input type="submit" class="btn btn-primary" value="Registrar Usuario">
 		</form:form>
 	</div>
 	<jsp:include page='../template/footer.jsp'/>
