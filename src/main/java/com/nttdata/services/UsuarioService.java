@@ -1,14 +1,18 @@
 package com.nttdata.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nttdata.models.Role;
 import com.nttdata.models.Usuario;
+import com.nttdata.repositories.RoleRepository;
 import com.nttdata.repositories.UsuarioRepository;
 
 @Service
@@ -17,12 +21,27 @@ public class UsuarioService {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 	
+	@Autowired
+	RoleService roleService;
+	
+	@Autowired
+	BCryptPasswordEncoder bcpe;
+	
 	//buscar por email
 	public Usuario findByEmail(String email) {
 		return usuarioRepository.findByEmail(email);
+		
 	}
 	
 	//insertar usuario
+	public Usuario persistirUsuarioRol(Usuario usuario) {
+		
+		usuario.setPassword(bcpe.encode(usuario.getPassword()));
+		usuario.setRoles(roleService.findByNombre("ROLE_USER"));
+		return usuarioRepository.save(usuario);
+	}
+	
+	
 	public Usuario registroUsuario(Usuario usuario) {
 
 		//hashear el password

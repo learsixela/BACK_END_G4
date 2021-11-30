@@ -19,15 +19,15 @@ public class CelularController {
 	@Autowired
 	CelularService celularService;
 	
-	@Autowired
-	UsuarioService usuarioService;
+	/*@Autowired
+	UsuarioService usuarioService;*/
 	
 	
 	@RequestMapping("")
 	public String index(Model model) {
 		model.addAttribute("celular", new Celular());
 		model.addAttribute("listaCelulares", celularService.obtenerListaCelulares());
-		model.addAttribute("listaUsuarios", usuarioService.obtenerListaUsuarios());
+		//model.addAttribute("listaUsuarios", usuarioService.obtenerListaUsuarios());
 		
 		
 		return "celular/celular.jsp";

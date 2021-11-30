@@ -63,11 +63,12 @@ public class UsuarioController {
 		if(usuario2!=null) {
 			System.out.println("usuario existe");
 		}else {
-			usuarioService.registroUsuario(usuario);
+			//usuarioService.registroUsuario(usuario);
+			usuarioService.persistirUsuarioRol(usuario);
 		}
 		//retorno mensaje
 		
-		return "usuario/login.jsp";
+		return "redirect:/login";
 	}
 	
 	/*
