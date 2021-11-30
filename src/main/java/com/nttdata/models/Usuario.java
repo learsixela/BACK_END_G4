@@ -53,7 +53,7 @@ public class Usuario {
 	@JoinColumn(name="proyecto_id")
 	private Proyecto proyecto;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 		name="roles_usuarios",//tabla intermedia
 		joinColumns = @JoinColumn(name="usuario_id"),
