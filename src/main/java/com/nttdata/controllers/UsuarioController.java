@@ -60,7 +60,9 @@ public class UsuarioController {
 	public String registrar(@Valid @ModelAttribute("usuario") Usuario usuario)
 	{
 		Usuario usuario2 = usuarioService.findByEmail(usuario.getEmail());
-		if(usuario2!= null) {
+		if(usuario2!=null) {
+			System.out.println("usuario existe");
+		}else {
 			usuarioService.registroUsuario(usuario);
 		}
 		//retorno mensaje
@@ -81,14 +83,13 @@ public class UsuarioController {
 		boolean resultado = usuarioService.loginUsuario(email,password);
 		if(resultado) {
 			Usuario usuario = usuarioService.findByEmail(email);
-			//almacenando variables de sessio0n
+			//almacenando variables de session
 			session.setAttribute("usuario_id", usuario.getId());
 			session.setAttribute("nombre_usuario", usuario.getNombre());
 			return "redirect:/home";
 		}else {
 			return "redirect:/login";
 		}
-		
 	}
 	
 

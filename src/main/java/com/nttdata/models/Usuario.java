@@ -1,6 +1,7 @@
 package com.nttdata.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -30,6 +33,7 @@ public class Usuario {
 	@NotNull
 	@NotEmpty
 	private String nombre;
+	
 	private String apellido;
 	private String limite;
 	private String codigoPostal;
@@ -48,6 +52,15 @@ public class Usuario {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="proyecto_id")
 	private Proyecto proyecto;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(
+		name="roles_usuarios",//tabla intermedia
+		joinColumns = @JoinColumn(name="usuario_id"),
+		inverseJoinColumns = @JoinColumn(name="role_id")
+	)
+	private List<Role> roles;
+	
 	
 	@Column(updatable = false)
 	private Date createdAt;
@@ -80,6 +93,23 @@ public class Usuario {
 		this.codigoPostal = codigoPostal;
 	}
 	
+	public Usuario(@NotNull @NotEmpty String nombre, String apellido, String limite, String codigoPostal, String rut,
+			String email, String password, String passwordConfirmation, Celular celular, Proyecto proyecto,
+			List<Role> roles) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.limite = limite;
+		this.codigoPostal = codigoPostal;
+		this.rut = rut;
+		this.email = email;
+		this.password = password;
+		this.passwordConfirmation = passwordConfirmation;
+		this.celular = celular;
+		this.proyecto = proyecto;
+		this.roles = roles;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -168,5 +198,13 @@ public class Usuario {
 
 	public void setPasswordConfirmation(String passwordConfirmation) {
 		this.passwordConfirmation = passwordConfirmation;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 }
