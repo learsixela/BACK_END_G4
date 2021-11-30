@@ -10,7 +10,7 @@
 			<hr>
 	<h2>Ingreso al sistema</h2>
 	
-		<form action="/login" method="post">
+		<form action="/usuario/login" method="post">
 			<label for="username">Nombre:</label>
 			<input type="text" class="form-control" name="username" placeholder="Ingresa tu nombre">
 			<br>

@@ -1,5 +1,6 @@
 package com.nttdata.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -76,7 +77,18 @@ public class UsuarioController {
 	*/
 	//capturar la informacion del formulario
 	@RequestMapping("/login")
-	public String login(@RequestParam("email") String email,
+	public String login(Principal principal, Model model,HttpSession session) {
+		
+		String nombre = principal.getName();
+		
+		Usuario usuario= usuarioService.findByNombre(nombre);
+		model.addAttribute("nombre_usuario", usuario.getNombre());
+		return "home.jsp";
+		
+	}
+	
+	
+	/*public String login(@RequestParam("email") String email,
 			@RequestParam("password") String password,
 			HttpSession session
 			) 
@@ -91,7 +103,7 @@ public class UsuarioController {
 		}else {
 			return "redirect:/login";
 		}
-	}
+	}*/
 	
 
 	

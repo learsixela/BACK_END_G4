@@ -109,5 +109,9 @@ public class UsuarioService {
 			}
 		}	
 	}
+
+	public Usuario findByNombre(String nombre) {
+		return usuarioRepository.findByNombre(nombre);
+	}
 	 
 }
