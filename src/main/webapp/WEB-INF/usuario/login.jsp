@@ -11,8 +11,8 @@
 	<h2>Ingreso al sistema</h2>
 	
 		<form action="/usuario/login" method="post">
-			<label for="username">Nombre:</label>
-			<input type="text" class="form-control" name="username" placeholder="Ingresa tu nombre">
+			<label for="email">Email:</label>
+			<input type="text" class="form-control" name="email" placeholder="Ingresa tu email">
 			<br>
 			<label for="password">Password:</label>
 			<input type="password" class="form-control" name="password" placeholder="Ingresa tu password">
